@@ -10,6 +10,9 @@ asm_demo.o: asm_demo.S
 asm_demo.elf: asm_demo.o
 	$(TRICORE_GCC_PATH)/tricore-elf-ld -T linker.ld -o $(OUTPATH)/$@ $(OUTPATH)/$<
 
+asm_dump: asm_demo.elf
+	$(TRICORE_GCC_PATH)/tricore-elf-objdump -D $(OUTPATH)/$<
+
 debug_asm_demo: asm_demo.elf
 	$(TRICORE_QEMU_PATH)/qemu-system-tricore $(QEMU_FLAGS) -S -s -kernel $(OUTPATH)/$<
 
