@@ -1,6 +1,6 @@
 ASM_FLAGS += -g -c -Wall -nostdlib -nostdinc
 CFLAGS += -g -Wall
-QEMU_FLAGS = -nographic -M tricore_tsim161
+QEMU_FLAGS = -display none -M tricore_tsim161 -semihosting
 
 OUTPATH=build
 
@@ -23,4 +23,10 @@ c_demo.elf: c_demo.c
 debug_c_demo: c_demo.elf
 	$(TRICORE_QEMU_PATH)/qemu-system-tricore $(QEMU_FLAGS) -S -s -kernel $(OUTPATH)/$<
 
+
+cpp_demo.elf: cpp_demo.cpp
+	$(TRICORE_GCC_PATH)/tricore-elf-g++ $(CFLAGS) -o $(OUTPATH)/$@ $<
+
+run_cpp_demo: cpp_demo.elf
+	$(TRICORE_QEMU_PATH)/qemu-system-tricore $(QEMU_FLAGS) -kernel $(OUTPATH)/$<
 

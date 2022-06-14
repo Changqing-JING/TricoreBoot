@@ -26,11 +26,11 @@ make -j $(nproc)
 echo "export TRICORE_QEMU_PATH=$(pwd)/build" >> ~/.profile
 ```
 
-### Install gdb
+### Install tricore gdb
 ```shell
 git clone https://github.com/volumit/gdb-tricore.git
 cd gdb-tricore
-CC=gcc-9 ./configure --target=tricore-unknown-elf x86_64-pc-linux-gnu --host=x86_64-pc-linux-gnu
+CC=gcc-9 CFLAGS=-Wno-error ./configure --target=tricore-unknown-elf x86_64-pc-linux-gnu --host=x86_64-pc-linux-gnu
 make -j $(nproc)
 echo "export TRICORE_GDB_PATH=$(pwd)/gdb" >> ~/.profile
 ```
@@ -56,13 +56,18 @@ make debug_asm_demo
 1. config the launch.json according to example_launch.json
 2. launch and debug in vscode
 
-#### Run C demo
+#### Build C demo
 ```shell
 make c_demo.elf
 ```
 #### Run C demo in qemu with remote gdb server
 ```shell
 make debug_c_demo
+```
+
+#### Run C++ Demo
+```shell
+make run_cpp_demo
 ```
 
 
