@@ -1,3 +1,4 @@
+
 #include <stdint.h>
 #include <stdio.h>
 #include <stdlib.h>
@@ -12,11 +13,22 @@ uint8_t instruction[] = {
 
 uint8_t jitCode[100];
 
+extern uint8_t __USTACK;
+extern uint8_t __USTACK_TOP;
+
+
 int main(){
     int a = 10;
     int b = 20;
     int c = a+b;
     int d = c*2;
+    (void)d;
+
+    uint8_t* stackBase  = &__USTACK;
+    uint8_t* stackTop = &__USTACK_TOP;
+    int stackSize = stackBase - stackTop;
+
+    printf("stackBase %p, stackTop %p, stackSize %dk\n", stackBase, stackTop, stackSize/1024);
 
     FOO foo = (FOO)&instruction;
 
@@ -30,5 +42,5 @@ int main(){
 
     printf("e1 == e2 %d\n", e1 == e2);
 
-    return d;
+    return 0;
 }

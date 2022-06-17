@@ -71,3 +71,16 @@ make run_cpp_demo
 ```
 
 
+### Show commands used by gcc
+```shell
+strace -s 1024 -o gcc.trace -f -e trace=/exec  gcc
+```
+
+## Build cmake demo
+```shell
+cd build
+cmake ..
+make
+```
+
+

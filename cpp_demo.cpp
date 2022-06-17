@@ -23,8 +23,7 @@ void printTextFile(const char *filename) {
 }
 
 int main() {
-  const char* path =
-      "/home/jcq/workspace/LearningProjects/TricoreBoot/example_launch.json";
+  const char *path = __FILE__;
   printTextFile(path);
   return 0;
 }
