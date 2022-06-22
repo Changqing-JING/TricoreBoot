@@ -13,7 +13,7 @@ __CSA_SIZE = DEFINED(__CSA_SIZE) ? __CSA_SIZE : 4K ; /*16K on TC 39*/
  * functions. Below you can define the minimum amount of memory that
  * the heap should provide.
  */
-__HEAP__SIZE = 55K ;
+__HEAP__SIZE = 50K ;
 SECTIONS
 {
   /*

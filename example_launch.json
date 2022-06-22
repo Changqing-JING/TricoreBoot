@@ -29,14 +29,14 @@
             "request": "launch",
             "program": "${workspaceFolder}/build/c_demo.elf",
             "args": [],
-            "stopAtEntry": true,
+            "stopAtEntry": false,
             "cwd": "${fileDirname}",
             "environment": [],
             "externalConsole": false,
             "MIMode": "gdb",
             "miDebuggerPath": "${env:TRICORE_GDB_PATH}/gdb",
             "miDebuggerServerAddress": "127.0.0.1:1234",
-            "stopAtConnect": true,
+            "stopAtConnect": false,
             "setupCommands": [
                 {
                     "description": "Enable pretty-printing for gdb",
@@ -44,6 +44,29 @@
                     "ignoreFailures": true
                 }
             ]
+        },
+
+        {
+            "name": "(gdb) cpp_demo",
+            "type": "cppdbg",
+            "request": "launch",
+            "program": "${workspaceFolder}/build/cpp_demo.elf",
+            "args": [],
+            "stopAtEntry": false,
+            "cwd": "${fileDirname}",
+            "environment": [],
+            "externalConsole": false,
+            "MIMode": "gdb",
+            "miDebuggerPath": "${env:TRICORE_GDB_PATH}/gdb",
+            "miDebuggerServerAddress": "127.0.0.1:1234",
+            "stopAtConnect": false,
+            "miDebuggerArgs": "-data-directory ${env:TRICORE_GDB_PATH}/data-directory",
+            "setupCommands": [
+               
+            ],
+            "logging": {
+                "engineLogging": true
+            }
         }
     ]
 }
