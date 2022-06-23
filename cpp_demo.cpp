@@ -1,3 +1,4 @@
+#include <filesystem>
 #include <fstream>
 #include <iostream>
 #include <string>
@@ -24,6 +25,12 @@ void printTextFile(const char *filename) {
 
 int main() {
   const char *path = __FILE__;
+
+  std::filesystem::path currentFilePath(__FILE__);
+  std::filesystem::path projectRoot = currentFilePath.parent_path();
+
+  std::cout << "workspace folder is " << projectRoot.string() << std::endl;
+
   printTextFile(path);
   return 0;
 }

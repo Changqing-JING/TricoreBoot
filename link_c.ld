@@ -13,7 +13,23 @@ __CSA_SIZE = DEFINED(__CSA_SIZE) ? __CSA_SIZE : 4K ; /*16K on TC 39*/
  * functions. Below you can define the minimum amount of memory that
  * the heap should provide.
  */
-__HEAP__SIZE = 50K ;
+__HEAP__SIZE = 920K ;
+
+
+MEMORY
+{
+
+  QEMU_RAM (w!xp): org = 0xd0000000, len = 1M
+}
+
+REGION_ALIAS("LARGE_DRAM", QEMU_RAM)
+
+REGION_ALIAS("DATA_MEM2", LARGE_DRAM)
+REGION_ALIAS("SDATA_MEM2", LARGE_DRAM)
+REGION_ALIAS("BSS_MEM2", LARGE_DRAM)
+REGION_ALIAS("ZDATA_MEM2", LARGE_DRAM)
+REGION_ALIAS("CSA_MEM2", LARGE_DRAM)
+
 SECTIONS
 {
   /*
@@ -44,7 +60,7 @@ SECTIONS
         *(.bbss)
     *(.bbss.*)
     CORE_SYM(ZBSS_END) = . ;
-  } > ZDATA_MEM
+  } > ZDATA_MEM2
   CORE_SEC(.zdata)  : ALIGN(8) FLAGS(awzl)
   {
     CORE_SYM(ZDATA_BASE) = . ;
@@ -54,13 +70,13 @@ SECTIONS
     *(.bdata)
     *(.bdata.*)
     CORE_SYM(ZDATA_END) = . ;
-  } > ZDATA_MEM AT> CODE_MEM
+  } > ZDATA_MEM2 AT> CODE_MEM
   CORE_SEC(.zrodata)  : ALIGN(8) FLAGS(arzl)
   {
         *(.zrodata)
         *(.zrodata.*)
     *(.gnu.linkonce.zr.*)
-  } > ZDATA_MEM AT> CODE_MEM
+  } > ZDATA_MEM2 AT> CODE_MEM
 
   /*
    * Allocate trap and interrupt vector tables.
@@ -229,7 +245,7 @@ SECTIONS
     *(.gnu.linkonce.d.*)
     SORT(CONSTRUCTORS)
     CORE_SYM(DATA_END) = . ;
-  } > DATA_MEM AT> CODE_MEM
+  } > DATA_MEM2 AT> CODE_MEM
   CORE_SEC(.sdata)  : ALIGN(8) FLAGS(awsl)
   {
         CORE_SYM(SDATA_BASE) = . ;
@@ -238,14 +254,14 @@ SECTIONS
     *(.sdata)
     *(.sdata.*)
     *(.gnu.linkonce.s.*)
-  } > SDATA_MEM  AT> CODE_MEM
+  } > SDATA_MEM2  AT> CODE_MEM
   CORE_SEC(.sbss)  : ALIGN(8) FLAGS(aws)
   {
     PROVIDE(CORE_SYM(__sbss_start) = .);
     *(.sbss)
     *(.sbss.*)
     *(.gnu.linkonce.sb.*)
-  } > SDATA_MEM
+  } > SDATA_MEM2
   /*
    * Allocate space for BSS sections.
    */
@@ -257,27 +273,27 @@ SECTIONS
     *(.gnu.linkonce.b.*)
     *(COMMON)
     . = ALIGN(8) ;
-  } > BSS_MEM
+  } > BSS_MEM2
   CORE_SEC(.ustack) : ALIGN(8) FLAGS(aw)
   {
     CORE_SYM(__USTACK_TOP) =  . ;
     . +=  __USTACK__SIZE ;
     . = ALIGN(8) ;
     CORE_SYM(__USTACK) =  . ;
-  } > BSS_MEM
+  } > BSS_MEM2
   CORE_SEC(.istack) : ALIGN(8) FLAGS(aw)
   {
     . +=  __ISTACK_SIZE ;
     . = ALIGN(8) ;
     CORE_SYM(__ISTACK) =  . ;
-  } > BSS_MEM
+  } > BSS_MEM2
   CORE_SEC(.heap) : ALIGN(8) FLAGS(aw)
   {
     CORE_SYM(__HEAP) = . ;
     . +=  __HEAP__SIZE ;
     . = ALIGN(8) ;
     CORE_SYM(__HEAP_END) =  . ;
-  } > BSS_MEM
+  } > BSS_MEM2
   /* define the CSA Memory area as an own section
    * this section will be allocated into the internal RAM
    * after the absolute addressable sections .zdata/.zbss
@@ -288,7 +304,7 @@ SECTIONS
     CORE_SYM(__CSA_BEGIN) = . ;
     . +=  __CSA_SIZE ;
     CORE_SYM(__CSA_END) = .;
-  } > CSA_MEM
+  } > CSA_MEM2
   CORE_SYM(__CSA_SIZE) = CORE_SYM(__CSA_END) - CORE_SYM(__CSA_BEGIN);
   CORE_SYM(_end) = CORE_SYM(__HEAP_END) ;
   PROVIDE(CORE_SYM(end) = CORE_SYM(_end)) ;
