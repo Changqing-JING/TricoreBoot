@@ -28,6 +28,7 @@ echo "export TRICORE_QEMU_PATH=$(pwd)/build" >> ~/.profile
 
 ### Install tricore gdb
 ```shell
+sudo apt install texinfo bison flex
 git clone https://github.com/volumit/gdb-tricore.git
 cd gdb-tricore
 CC=gcc-9 ./configure --host=x86_64-linux-gnu --target=tricore-elf --program-prefix=tricore-elf --disable-nls --disable-itcl --disable-tk --disable-tcl --disable-winsup --disable-gdbtk --disable-libgui --disable-rda --disable-sid --disable-sim --disable-newlib --disable-libgloss --disable-gas --disable-ld --disable-binutils --disable-gprof --disable-source-highlight --with-system-zlib --prefix=$INSTALL_PREFIX --disable-werror --with-python
