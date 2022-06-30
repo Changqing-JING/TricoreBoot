@@ -16,6 +16,7 @@ echo "export TRICORE_GCC_PATH=$(pwd)/tricore_940_linux/bin" >> ~/.profile
 
 ### Install tricore qemu
 ```shell
+sudo apt install git libglib2.0-dev libfdt-dev libpixman-1-dev zlib1g-dev ninja-build
 git clone https://github.com/volumit/qemu.git
 cd qemu
 git submodule update --init --progress

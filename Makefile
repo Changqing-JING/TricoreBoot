@@ -23,6 +23,9 @@ debug_asm_demo: asm_demo.elf
 c_demo.o: c_demo.c
 	$(TRICORE_GCC_PATH)/tricore-elf-gcc -c $(CFLAGS) -T link_c.ld -o $(OUTPATH)/$@ $<
 
+c_demo.S: c_demo.c
+	$(TRICORE_GCC_PATH)/tricore-elf-gcc -c $(CFLAGS) -S -o $(OUTPATH)/$@ $<
+
 c_demo.elf: c_demo.o
 	$(TRICORE_GCC_PATH)/tricore-elf-gcc -mcpu=tc39xx ${LINK_FLAGS} -o $(OUTPATH)/$@ $(OUTPATH)/$<
 

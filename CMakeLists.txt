@@ -3,7 +3,7 @@ set(CMAKE_CXX_STANDARD 17)
 set(CMAKE_C_COMPILER $ENV{TRICORE_GCC_PATH}/tricore-elf-gcc)
 set(CMAKE_CXX_COMPILER $ENV{TRICORE_GCC_PATH}/tricore-elf-g++)
 
-project(TricoreBoost)
+project(TricoreBoost C CXX ASM)
 
 set(CMAKE_EXPORT_COMPILE_COMMANDS ON)
 
@@ -19,6 +19,8 @@ set(CMAKE_EXE_LINKER_FLAGS "${CMAKE_EXE_LINKER_FLAGS}  -Wl,-T ${linkerScript}")
 
 add_executable(cpp_demo cpp_demo.cpp)
 add_executable(c_demo c_demo.c)
+add_executable(asmQuickSort quickSort.cpp ASMQuickSort.S)
 
 set_target_properties(cpp_demo PROPERTIES LINK_DEPENDS ${linkerScript})
 set_target_properties(c_demo PROPERTIES LINK_DEPENDS ${linkerScript})
+set_target_properties(asmQuickSort PROPERTIES LINK_DEPENDS ${linkerScript})
