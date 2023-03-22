@@ -6,7 +6,7 @@ sudo apt install gcc-9 g++-9
 
 ### Install tricore gcc
 ```shell
-sudo apt install 7zip
+sudo apt install p7zip-full
 git clone https://github.com/volumit/tricore_gcc940_linux_bins.git
 cd tricore_gcc940_linux_bins
 7z x tricore_940_linux.zip.001
@@ -19,12 +19,12 @@ echo "export TRICORE_GCC_PATH=$(pwd)/tricore_940_linux/bin" >> ~/.profile
 sudo apt install git libglib2.0-dev libfdt-dev libpixman-1-dev zlib1g-dev ninja-build
 git clone https://github.com/volumit/qemu.git
 cd qemu
-git submodule update --init --progress
+git submodule update --init --progress --recursive
 mkdir build
 cd build
 CC=gcc-9 CFLAGS=-Wno-error ../configure
 make -j $(nproc)
-echo "export TRICORE_QEMU_PATH=$(pwd)/build" >> ~/.profile
+echo "export TRICORE_QEMU_PATH=$(pwd)" >> ~/.profile
 ```
 
 ### Install tricore gdb

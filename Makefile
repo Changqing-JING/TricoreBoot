@@ -1,7 +1,9 @@
 ASM_FLAGS += -g -c -Wall -nostdlib -nostdinc
 CFLAGS += -g -Wall -mcpu=tc39xx
 LINK_FLAGS += -Wl,-T link_c.ld
-QEMU_FLAGS = -display none -M tricore_tsim162 -semihosting
+QEMU_FLAGS_BASIC = -display none -M tricore_tsim162
+QEMU_FLAGS = $(QEMU_FLAGS_BASIC) -semihosting
+
 
 ROOT_DIR:=$(shell dirname $(realpath $(firstword $(MAKEFILE_LIST))))
 
@@ -59,5 +61,21 @@ run_test_read_file: test_read_file.elf
 
 debug_test_read_file: test_read_file.elf
 	$(TRICORE_QEMU_PATH)/qemu-system-tricore -display none -M tricore_tsim161 -semihosting -S -s -kernel $(OUTPATH)/$<
+
+extern_large_data.o: extern_large_data.cpp
+	$(TRICORE_GCC_PATH)/tricore-elf-g++ -c -std=gnu++17 $(CFLAGS) -o $(OUTPATH)/$@ $(ROOT_DIR)/$^
+
+large_data.o: large_data.cpp
+	python create_large_data.py
+	$(TRICORE_GCC_PATH)/tricore-elf-g++ -c -std=gnu++17 $(CFLAGS) -o $(OUTPATH)/$@ $(ROOT_DIR)/$^
+
+extern_large_data.elf: extern_large_data.o large_data.o
+	$(TRICORE_GCC_PATH)/tricore-elf-g++ -std=gnu++17 $(CFLAGS) ${LINK_FLAGS} -o $(OUTPATH)/$@ $(OUTPATH)/extern_large_data.o $(OUTPATH)/large_data.o
+
+debug_extern_large_data: extern_large_data.elf
+	$(TRICORE_QEMU_PATH)/qemu-system-tricore $(QEMU_FLAGS_BASIC) -S -s -kernel $(OUTPATH)/$<
+
+run_extern_large_data: extern_large_data.elf
+	$(TRICORE_QEMU_PATH)/qemu-system-tricore $(QEMU_FLAGS_BASIC) -kernel $(OUTPATH)/$<
 
 

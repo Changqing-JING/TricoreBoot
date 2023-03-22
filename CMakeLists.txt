@@ -24,3 +24,6 @@ add_executable(asmQuickSort quickSort.cpp ASMQuickSort.S)
 set_target_properties(cpp_demo PROPERTIES LINK_DEPENDS ${linkerScript})
 set_target_properties(c_demo PROPERTIES LINK_DEPENDS ${linkerScript})
 set_target_properties(asmQuickSort PROPERTIES LINK_DEPENDS ${linkerScript})
+
+# add_executable(extern_large_data extern_large_data.cpp)
+# set_target_properties(extern_large_data PROPERTIES LINK_DEPENDS ${linkerScript})
