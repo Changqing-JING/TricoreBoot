@@ -9,3 +9,7 @@ _start:
 loop:
     mov %d4, 30
     J loop
+
+.section ".shared_data"
+
+filename: .byte 1
