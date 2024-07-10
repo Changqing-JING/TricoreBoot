@@ -1,0 +1,5 @@
+rm -rf install_dir/share/HOST/AURIX_MINGW_INSTALL/tricore_940_linux
+mkdir -p install_dir/share/HOST/AURIX_MINGW_INSTALL/tricore_940_linux
+mkdir -p install_dir/share/HOST/AURIX_MINGW_INSTALL/tricore_940_linux_shell
+cp -r install_dir/tricore_940_linux install_dir/share/HOST/AURIX_MINGW_INSTALL
+cp * install_dir/share/HOST/AURIX_MINGW_INSTALL/tricore_940_linux_shell

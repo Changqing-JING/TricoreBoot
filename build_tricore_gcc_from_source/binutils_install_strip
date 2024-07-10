@@ -1,0 +1,34 @@
+SRCDIR=path_to_package_940/binutils
+INSTALL_PREFIX=install_dir/tricore_940_linux
+PATH=install_dir/tricore_940_linux:$PATH
+
+cd binutils
+#install-strip is not supported by toplevel makefile
+cd bfd
+make install-strip 2>&1 | tee binutils_install.log
+cd ..
+cd binutils
+make install-strip 2>&1 | tee binutils_install.log
+cd ..
+cd etc
+make install-strip 2>&1 | tee binutils_install.log
+cd ..
+cd gas
+make install-strip 2>&1 | tee binutils_install.log
+cd ..
+cd gprof
+make install-strip 2>&1 | tee binutils_install.log
+cd ..
+cd intl
+make install-strip 2>&1 | tee binutils_install.log
+cd ..
+cd ld
+make install-strip 2>&1 | tee binutils_install.log
+cd ..
+cd libiberty
+make install-strip 2>&1 | tee binutils_install.log
+cd ..
+cd opcodes
+make install-strip 2>&1 | tee binutils_install.log
+cd ..
+cd ..

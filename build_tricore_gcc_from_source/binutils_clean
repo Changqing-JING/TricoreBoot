@@ -1,0 +1,9 @@
+SRCDIR=path_to_package_940/binutils
+INSTALL_PREFIX=install_dir/tricore_940_linux
+PATH=install_dir/tricore_940_linux:$PATH
+
+
+rm -rf binutils
+mkdir binutils
+cd binutils
+cd ..

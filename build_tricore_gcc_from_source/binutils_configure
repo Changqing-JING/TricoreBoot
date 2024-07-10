@@ -1,0 +1,38 @@
+SRCDIR=path_to_package_940/binutils
+INSTALL_PREFIX=install_dir/tricore_940_linux
+PATH=install_dir/tricore_940_linux:$PATH
+
+
+mkdir binutils
+cd binutils
+$SRCDIR/configure \
+CFLAGS='-fcommon' \
+LDFLAGS='-static' \
+--target=tricore-elf \
+--enable-targets=mcs-elf \
+--program-prefix=tricore-elf- \
+--disable-threads \
+--enable-nls \
+--disable-itcl \
+--disable-tk \
+--disable-tcl \
+--disable-winsup \
+--disable-gdbtk \
+--disable-libgui \
+--disable-rda \
+--disable-sid \
+--disable-sim \
+--disable-gdb \
+--disable-newlib \
+--disable-libgloss \
+--disable-test-suite \
+--enable-checking=release \
+--with-gnu-ld \
+--with-gnu-as \
+--with-pkgversion=GPL_HIGHTEC_BINUTILS220 \
+--with-bugurl=https://community.infineon.com/t5/AURIX/bd-p/AURIX \
+--prefix=$INSTALL_PREFIX \
+--disable-werror
+
+
+

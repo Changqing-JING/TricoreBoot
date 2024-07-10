@@ -1,0 +1,7 @@
+SRCDIR=path_to_package_940/gcc
+INSTALL_PREFIX=install_dir/tricore_940_linux
+PATH=install_dir/tricore_940_linux:$PATH
+cd gcc
+make -j12 all 2>&1 | tee gcc_make_cpp.log
+
+

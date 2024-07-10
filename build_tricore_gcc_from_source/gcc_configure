@@ -1,0 +1,81 @@
+SRCDIR=path_to_package_940/gcc
+INSTALL_PREFIX=install_dir/tricore_940_linux
+PATH=install_dir/tricore_940_linux:$PATH
+cd gcc
+
+
+
+$SRCDIR/configure \
+LDFLAGS='-static' \
+CFLAGS_FOR_TARGET='-g -O2 -ffast-math -ffunction-sections -mversion-info -mfast-div -fno-common -mno-eabi-bitfield-limit' \
+CPPFLAGS_FOR_TARGET='-g -O2 -ffast-math -ffunction-sections -mversion-info -mfast-div -fno-common -mno-eabi-bitfield-limit' \
+--target=tricore-elf \
+--enable-lib32 \
+--disable-lib64 \
+--prefix=$INSTALL_PREFIX \
+--enable-languages=c,c++ \
+--enable-libstdcxx-debug-flags='-gdwarf-3 -g3 -O0 -D_GLIBCXX_ASSERTIONS' \
+--enable-c99 \
+--enable-long-long \
+--enable-checking \
+--enable-nls \
+--enable-static \
+--disable-threads \
+--disable-shared \
+--with-headers=yes \
+--with-newlib=yes \
+--enable-mingw-wildcard \
+--disable-libstdcxx-pch \
+--enable-newlib-elix-level=3 \
+--enable-newlib-io-long-long \
+--disable-newlib-supplied-syscalls \
+--disable-libssp \
+--disable-test-suite \
+--with-hightec=yes \
+--with-licenser=no \
+--with-pkgversion=GPL_GCC940 \
+--with-bugurl=https://community.infineon.com/t5/AURIX/bd-p/AURIX \
+2>&1 | tee gcc_configure.log
+
+
+#$SRCDIR/configure \
+#LDFLAGS='-static' \
+#CXXFLAGS='-Wno-c++11-compat' \
+#--target=tricore-elf \
+#--enable-lib32 \
+#--disable-lib64 \
+#--prefix=$INSTALL_PREFIX \
+#--enable-languages=c,c++ \
+#--enable-c99 \
+#--enable-long-long \
+#--enable-checking \
+#--enable-nls \
+#--enable-static \
+#--disable-threads \
+#--disable-shared \
+#--with-headers=yes \
+#--with-newlib=yes \
+#--enable-mingw-wildcard \
+#--disable-libstdcxx-pch \
+#--enable-newlib-elix-level=3 \
+#--enable-newlib-io-long-long \
+#--disable-newlib-supplied-syscalls \
+#--disable-libssp \
+#--disable-test-suite \
+#--with-licenser=no \
+#--with-pkgversion=GPL_HIGHTEC_GCC494 \
+#--with-bugurl=https://community.infineon.com/t5/AURIX/bd-p/AURIX \
+#2>&1 | tee gcc_configure.log
+
+#$SRCDIR/configure \
+#LDFLAGS='-static' \
+#--target=tricore-elf \
+#--prefix=$INSTALL_PREFIX \
+#--enable-languages=c,c++ \
+#--enable-checking \
+#--disable-nls \
+#--disable-shared \
+#--with-newlib \
+#--disable-libssp \
+#2>&1 | tee gcc_configure.log
+

@@ -1,0 +1,27 @@
+INSTALL_PREFIX=install_dir/tricore_940_linux
+PATH=install_dir/tricore_940_linux:$PATH
+rm -fr $INSTALL_PREFIX
+sh binutils_clean
+sh binutils_mcs_configure
+sh binutils_mcs_make
+sh binutils_mcs_install
+
+sh binutils_clean
+sh binutils_configure
+sh binutils_make
+sh binutils_install
+
+sh newlib_clean
+sh gcc_clean
+sh gcc_configure
+sh gcc_make_c
+sh gcc_install_c
+
+sh newlib_configure
+sh newlib_make
+sh newlib_install
+
+sh gcc_make_clib
+sh gcc_install_clib
+sh gcc_install_strip_clib
+
