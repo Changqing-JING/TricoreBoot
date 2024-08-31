@@ -1,7 +1,7 @@
 ## Install tricore toolchain on Ubuntu
-For ubuntu 22.04 users, a GCC-9 is recommended to use for better compatibility when build gdb and qemu
+
 ```shell
-sudo apt install gcc-9 g++-9
+sudo apt install build-essential 
 ```
 
 ### Install tricore gcc
@@ -22,7 +22,7 @@ cd qemu
 git submodule update --init --progress --recursive
 mkdir build
 cd build
-CC=gcc-9 CFLAGS=-Wno-error ../configure
+CFLAGS="-Wno-error -fcommon" ../configure --target-list=tricore-softmmu --enable-capstone=internal
 make -j $(nproc)
 echo "export TRICORE_QEMU_PATH=$(pwd)" >> ~/.profile
 ```
@@ -30,10 +30,10 @@ echo "export TRICORE_QEMU_PATH=$(pwd)" >> ~/.profile
 ### Install tricore gdb
 #### On Linux
 ```shell
-sudo apt install texinfo bison flex
+sudo apt install texinfo bison flex python3-dev libdebuginfod-dev
 git clone https://github.com/volumit/gdb-tricore.git
 cd gdb-tricore
-CC=gcc-9 ./configure --host=x86_64-linux-gnu --target=tricore-elf --program-prefix=tricore-elf --disable-nls --disable-itcl --disable-tk --disable-tcl --disable-winsup --disable-gdbtk --disable-libgui --disable-rda --disable-sid --disable-sim --disable-newlib --disable-libgloss --disable-gas --disable-ld --disable-binutils --disable-gprof --disable-source-highlight --with-system-zlib --prefix=$INSTALL_PREFIX --disable-werror --with-python
+CFLAGS="-Wno-error -fcommon" ./configure --with-python=/usr/bin/python3 --host=x86_64-linux-gnu --target=tricore-elf --program-prefix=tricore-elf --disable-nls --disable-itcl --disable-tk --disable-tcl --disable-winsup --disable-gdbtk --disable-libgui --disable-rda --disable-sid --disable-sim --disable-newlib --disable-libgloss --disable-gas --disable-ld --disable-binutils --disable-gprof --disable-source-highlight --with-system-zlib --prefix=$INSTALL_PREFIX --disable-werror --with-python
 make -j $(nproc)
 echo "export TRICORE_GDB_PATH=$(pwd)/gdb" >> ~/.profile
 ```
