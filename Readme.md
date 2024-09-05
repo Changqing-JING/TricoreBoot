@@ -10,7 +10,7 @@ sudo apt install p7zip-full
 git clone https://github.com/volumit/tricore_gcc940_linux_bins.git
 cd tricore_gcc940_linux_bins
 7z x tricore_940_linux.zip.001
-chmod -R 777 tricore_940_linux
+chmod -R +x tricore_940_linux
 echo "export TRICORE_GCC_PATH=$(pwd)/tricore_940_linux/bin" >> ~/.profile
 ```
 
@@ -30,7 +30,8 @@ echo "export TRICORE_QEMU_PATH=$(pwd)" >> ~/.profile
 ### Install tricore gdb
 #### On Linux
 ```shell
-sudo apt install texinfo bison flex python3-dev libdebuginfod-dev
+sudo apt install texinfo bison flex python3-dev libdebuginfod-dev python3-pip python-is-python3
+python -m pip install --upgrade setuptools --break-system-packages
 git clone https://github.com/volumit/gdb-tricore.git
 cd gdb-tricore
 CFLAGS="-Wno-error -fcommon" ./configure --with-python=/usr/bin/python3 --host=x86_64-linux-gnu --target=tricore-elf --program-prefix=tricore-elf --disable-nls --disable-itcl --disable-tk --disable-tcl --disable-winsup --disable-gdbtk --disable-libgui --disable-rda --disable-sid --disable-sim --disable-newlib --disable-libgloss --disable-gas --disable-ld --disable-binutils --disable-gprof --disable-source-highlight --with-system-zlib --prefix=$INSTALL_PREFIX --disable-werror --with-python
