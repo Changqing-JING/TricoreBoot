@@ -17,7 +17,7 @@ echo "export TRICORE_GCC_PATH=$(pwd)/tricore_940_linux/bin" >> ~/.profile
 ### Install tricore qemu
 ```shell
 sudo apt install git libglib2.0-dev libfdt-dev libpixman-1-dev zlib1g-dev ninja-build
-git clone https://github.com/volumit/qemu.git
+git clone https://github.com/Schleifner/qemu.git
 cd qemu
 git submodule update --init --progress --recursive
 mkdir build
@@ -34,7 +34,7 @@ sudo apt install texinfo bison flex python3-dev libdebuginfod-dev python3-pip py
 python -m pip install --upgrade setuptools --break-system-packages
 git clone https://github.com/volumit/gdb-tricore.git
 cd gdb-tricore
-CFLAGS="-Wno-error -fcommon" ./configure --with-python=/usr/bin/python3 --host=x86_64-linux-gnu --target=tricore-elf --program-prefix=tricore-elf- --disable-nls --disable-itcl --disable-tk --disable-tcl --disable-winsup --disable-gdbtk --disable-libgui --disable-rda --disable-sid --disable-sim --disable-newlib --disable-libgloss --disable-gas --disable-ld --disable-binutils --disable-gprof --disable-source-highlight --with-system-zlib --prefix=$INSTALL_PREFIX --disable-werror --with-python
+CFLAGS="-Wno-error -fcommon" ./configure --with-python=/usr/bin/python --host=x86_64-linux-gnu --target=tricore-elf --program-prefix=tricore-elf- --disable-nls --disable-itcl --disable-tk --disable-tcl --disable-winsup --disable-gdbtk --disable-libgui --disable-rda --disable-sid --disable-sim --disable-newlib --disable-libgloss --disable-gas --disable-ld --disable-binutils --disable-gprof --disable-source-highlight --with-system-zlib --prefix=$INSTALL_PREFIX --disable-werror --with-python
 make -j $(nproc)
 echo "export TRICORE_GDB_PATH=$(pwd)/gdb" >> ~/.profile
 ```
