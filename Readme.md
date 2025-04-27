@@ -43,6 +43,26 @@ make -j $(nproc)
 echo "export TRICORE_GDB_PATH=$(pwd)/gdb" >> ~/.profile
 ```
 
+##### For user with Ubuntu 24.04+
+The tricore gdb 10 needs python 3.10, but Ubuntu 24.04 installed python 3.12 by default. To solve this problem, python 3.10 need to be installed.
+```shell
+sudo add-apt-repository ppa:deadsnakes/ppa
+sudo apt update
+sudo apt install python3.10 python3.10-dev
+
+sudo update-alternatives --install /usr/bin/python python /usr/bin/python3.12 1
+sudo update-alternatives --install /usr/bin/python python /usr/bin/python3.10 2
+
+sudo update-alternatives --set python /usr/bin/python3.10
+```
+
+Btw. the `add-apt-repository` doesn't use apt proxy config file. If the device is behind http proxy, `add-apt-repository` need to work like this:
+```shell
+export http_proxy=http://<proxy>:<port>
+export https_proxy=http://<proxy>:<port>
+sudo -E add-apt-repository ppa:deadsnakes/ppa
+```
+
 #### On Windows with Mingw
 
 ```shell
