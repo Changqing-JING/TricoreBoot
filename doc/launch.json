@@ -1,0 +1,96 @@
+{
+  // Use IntelliSense to learn about possible attributes.
+  // Hover to view descriptions of existing attributes.
+  // For more information, visit: https://go.microsoft.com/fwlink/?linkid=830387
+  "version": "0.2.0",
+  "configurations": [
+    {
+      "name": "(gdb) asm demo",
+      "type": "cppdbg",
+      "request": "launch",
+      "program": "${workspaceFolder}/build/asm_demo.elf",
+      "args": [],
+      "stopAtEntry": false,
+      "cwd": "${workspaceFolder}",
+      "miDebuggerPath": "/home/jcq/workspace/github/tricore/gcc11/tricore-gcc-toolchain/INSTALL/bin/tricore-elf-gdb",
+      "miDebuggerServerAddress": "127.0.0.1:1234",
+      "environment": [],
+      "externalConsole": false,
+      "MIMode": "gdb",
+      "setupCommands": [
+        {
+          "description": "Set Disassembly Flavor to Intel",
+          "text": "set architecture tricore",
+          "ignoreFailures": true
+        }
+      ],
+      "preLaunchTask": "asm demo"
+    },
+    {
+      "name": "(gdb) c demo",
+      "type": "cppdbg",
+      "request": "launch",
+      "program": "${workspaceFolder}/build/c_demo.elf",
+      "args": [],
+      "stopAtEntry": false,
+      "cwd": "${workspaceFolder}",
+      "miDebuggerPath": "/home/jcq/workspace/github/tricore/gcc11/tricore-gcc-toolchain/INSTALL/bin/tricore-elf-gdb",
+      //"miDebuggerPath": "/home/jcq/workspace/github/tricore/gdb-tricore/gdb/gdb",
+      "miDebuggerServerAddress": "127.0.0.1:1234",
+      "environment": [],
+      "externalConsole": false,
+      "MIMode": "gdb",
+      "setupCommands": [
+        {
+          "description": "Set libc path",
+          "text": "set substitute-path ../../../../../../../share/HOST/AURIX_MINGW/SRC /home/jcq/workspace/github/tricore",
+          "ignoreFailures": false
+        },
+        {
+          "description": "Set libc path2",
+          "text": "set substitute-path ../../../../../../../../share/HOST/AURIX_MINGW/SRC /home/jcq/workspace/github/tricore",
+          "ignoreFailures": false
+        },
+        {
+          "description": "Set arch",
+          "text": "set architecture TriCore:V1_8",
+          "ignoreFailures": true
+        }
+      ],
+      "preLaunchTask": "c demo"
+    },
+
+    {
+      "name": "(gdb) cpp demo",
+      "type": "cppdbg",
+      "request": "launch",
+      "program": "${workspaceFolder}/build/cpp_demo.elf",
+      "args": [],
+      "stopAtEntry": false,
+      "cwd": "${workspaceFolder}",
+      "miDebuggerPath": "/home/jcq/workspace/github/tricore/gcc11/tricore-gcc-toolchain/INSTALL/bin/tricore-elf-gdb",
+      "miDebuggerServerAddress": "127.0.0.1:1234",
+      "environment": [],
+      "externalConsole": false,
+      "MIMode": "gdb",
+      "setupCommands": [
+        {
+          "description": "Set libc path",
+          "text": "set substitute-path ../../../../../../../share/HOST/AURIX_MINGW/SRC /home/jcq/workspace/github/tricore",
+          "ignoreFailures": false
+        },
+        {
+          "description": "Set libc path2",
+          "text": "set substitute-path ../../../../../../../../share/HOST/AURIX_MINGW/SRC /home/jcq/workspace/github/tricore",
+          "ignoreFailures": false
+        }
+        // {
+        //   "description": "ignore sigtrap",
+        //   "text": "handle SIGTRAP nostop noprint pass",
+        //   "ignoreFailures": false
+        // }
+      ],
+      "preLaunchTask": "cpp demo"
+    }
+  ]
+}
